@@ -84,6 +84,7 @@
       
       if (pressedKey) {
         pressedKey.classList.toggle('playing');
+        sound.currentTime = 0;
         sound.play();
         window.setTimeout(() => pressedKey.classList.toggle('playing'), 300)
       }
