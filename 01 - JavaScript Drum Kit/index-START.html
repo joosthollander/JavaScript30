@@ -70,12 +70,20 @@
           const pressedKey = event.target.closest('.key');
           this.playSound(pressedKey.dataset.key);
         });
-        
       })
 
       window.addEventListener('keyup', (event) => {
           this.playSound(event.keyCode);
       });
+
+      document.querySelectorAll('.key').forEach(keyButton => {
+        keyButton.addEventListener('transitionend', function(event){
+          if (event.propertyName !== 'transform') return;
+          this.classList.remove('playing');
+          event.preventDefault();
+        })
+      });
+
     }
 
     playSound(key) {
@@ -83,10 +91,10 @@
       const pressedKey = document.querySelector(`div[data-key='${key}']`);
       
       if (pressedKey) {
-        pressedKey.classList.toggle('playing');
+        pressedKey.classList.add('playing');
         sound.currentTime = 0;
         sound.play();
-        window.setTimeout(() => pressedKey.classList.toggle('playing'), 300)
+        //window.setTimeout(() => pressedKey.classList.toggle('playing'), 300)
       }
     }
   }
