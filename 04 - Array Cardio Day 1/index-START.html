@@ -57,25 +57,32 @@
       return yearsLived(a) - yearsLived(b)
     }));
 
+    const sortedInventors = inventors.map(inventor => {
+      return {...inventor, age: inventor.passed - inventor.year};
+    }).sort((a,b) => {a-b});
+
+    console.table(sortedInventors);
+
     function yearsLived(inventor) {
       return inventor.passed - inventor.year;
     }
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-    Array.from(document.querySelectorAll("#mw-pages > div > div * a")).map(item => item.text).filter(item => item.indexOf('de') > -1)
+    //Array.from(document.querySelectorAll("#mw-pages > div > div * a")).map(item => item.text).filter(item => item.indexOf('de') > -1)
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-    const peoplez = people.map(person => {
-      return {
-        firstName: person.split(',')[1].trim(),
-        lastName: person.split(',')[0]
-        };
-      }).sort(person => person.lastName);
+    const peoplez = people
+                      .map(person => {
+                          [lastName, firstName] = person.split(', ')
+                          return {firstName,lastName};
+                          }
+                        )
+                      .sort((a,b) => a.firstName > b.firstName ? 1 : -1);
 
-      console.log(peoplez);
+      console.table(peoplez);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
