@@ -7,6 +7,37 @@
 </head>
 <body>
 <script>
+
+const secret = "joost";
+let code = [];
+let timer;
+
+window.addEventListener('keyup', event => {checkCode(event)});
+
+function checkCode(event) {
+  window.clearTimeout(timer);
+
+  timer = window.setTimeout(() => {
+    code = []
+  }, 2000);
+
+  code.push(event.key);
+  console.log(code.join(''));
+  if (code.join('').includes(secret))
+  {
+    code = [];
+    window.alert('yeuh');
+  }
+
+  let code2 = [];
+
+  function checkCode(event) {
+    
+    
+    consolo.log(code2.join(''))
+  }
+}
+
 </script>
 </body>
 </html>

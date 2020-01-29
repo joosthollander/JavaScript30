@@ -43,11 +43,40 @@
 
   </style>
 
-  <ul id="bands"></ul>
+  <ul id="bands">
+
+  </ul>
 
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+const articles = ['The','A','An'];
 
+const bandsul = document.querySelector('[id=bands]');
+console.log(bandsul);
+
+const reg = new RegExp(`^(${articles.join('|')})\\s`,"gmi");
+
+function removeArticles(input) {
+  return input.replace(reg,'');
+}
+
+sortedBands = bands.sort((a,b) => removeArticles(a) < removeArticles(b) ? -1 : 1);
+
+console.table(sortedBands);
+
+bandsul.innerHTML= sortedBands.map(band => {
+  return `<li>${band}</li>`;
+}).join(''); 
+
+
+function removeArticlesOld(input) {
+  const result = articles.reduce((accum, article) => {
+    //accum = accum.replace(new RegExp(`${article}\s`, 'gi'), '').trim()
+    accum = accum.trimStart(article).trim();
+    return accum;
+  }, input)
+  return result;
+}
 
 </script>
 

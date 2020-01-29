@@ -182,6 +182,19 @@
     </li>
   </ul>
 <script>
+  const totalSeconds = Array.from(document.querySelectorAll('.videos li'))
+                  .reduce((total, current) => {
+                    const totalTime = current.dataset.time;
+                    const minutes = parseInt(totalTime.split(':')[0]);
+                    const seconds = parseInt(totalTime.split(':')[1]);
+                    total += ((minutes * 60) + (seconds));
+                    return total;
+                  }, 0)
+  
+  var date = new Date(null);
+  date.setSeconds(totalSeconds);  
+  var result = date.toISOString().substr(11, 8);
+  console.log(result);
 </script>
 </body>
 </html>

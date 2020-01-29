@@ -96,6 +96,43 @@
   </div>
 
 <script>
+  $items = document.querySelectorAll('.item input');
+
+  let firstItem = -1;
+  let newState;
+
+  $items.forEach((item, index) => {
+    item.addEventListener('click', (event) => {
+      console.log(event);
+      console.log(`clicked ${index}th item`);
+
+      if (event.shiftKey) {
+        if (firstItem > -1) {
+          //update items 
+          this.updateItems(firstItem, index)
+        }
+      }
+      else {
+        firstItem = index;
+        newState =  event.target.checked;
+        console.log(newState)
+      }
+    })
+  });
+
+  function updateItems(startIndex, endIndex) {
+    console.log(startIndex,endIndex);
+    $items.forEach((item, index) => {
+      if (index >= startIndex && index <= endIndex) {
+        console.log(`update item ${index} with ${newState}`)
+        item.checked = newState;
+      }
+    })
+  }
+
+
+
+  console.log($items);
 </script>
 </body>
 </html>
